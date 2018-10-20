@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+  	<head>
+    	<title>Control Interno TAECII</title>
+    	<!-- BEGIN META -->
+    	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<meta name="keywords" content="your,keywords">
+    	<meta name="description" content="Short explanation about this website">
+    	<!-- END META -->
+
+    	<!-- BEGIN STYLESHEETS -->
+    	<link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css'/>
+    	<link type="text/css" rel="stylesheet" href="../assets/css/theme-default/bootstrap.css?1422792965" />
+
+    	<link type="text/css" rel="stylesheet" href="../assets/css/theme-default/materialadmin.css?1425466319" />
+
+    	<link type="text/css" rel="stylesheet" href="../assets/css/theme-default/font-awesome.min.css?1422529194" />
+
+    	<link type="text/css" rel="stylesheet"  href="../assets/css/theme-default/material-design-iconic-font.min.css?1421434286" />
+    	
+    	<link type="text/css" rel="stylesheet" href="../assets/js/libs/select2-4.0.3 2/dist/css/select2.min.css"></link>
+
+    	<link type="text/css" rel="stylesheet" href="../assets/css/theme-default/libs/DataTables/jquery.dataTables.css">
+
+    	<link type="text/css" rel="stylesheet" href="../assets/css/theme-default/libs/toastr/toastr.css?1425466569" />
+
+    	<link type="text/css" rel="stylesheet" href="../assets/css/theme-default/libs/bootstrap-datepicker/datepicker3.css?1424887858" />
+
+    	<link type="text/css" rel="stylesheet" href="../assets/css/theme-default/libs/jquery-ui/jquery-ui-theme.css?1423393666" />
+
+    	<link type="text/css" rel="stylesheet" href="../assets/css/theme-default/libs/bootstrap-tagsinput/bootstrap-tagsinput.css?1424887862" />
+
+    	<link type="text/css" rel="stylesheet" href="../assets/css/theme-default/libs/multi-select/multi-select.css?1424887857" />
+
+    	<style>
+			#componentTable {
+			    font-family: arial, sans-serif;
+			    border-collapse: collapse;
+			    width: 100%;
+			}
+
+			.td, .th {
+			    border: 1px solid #dddddd;
+			    text-align: left;
+			    padding: 8px;
+			}
+
+			.tr{
+			    border: 2px solid #000;
+			}
+
+			.th {
+			    background-color: #dddddd;
+			}
+		</style>
+  	</head>
+
+  <body class="menubar-hoverable menubar-pin menubar-first ">
+  	<!-- BEGIN HEADER-->
+    <header id="header">
+      	<div class="headerbar">
+        	<img alt="" class="height-1 centerIMG" src="../assets/img/cnbs.png" />
+      	</div>
+    </header>
+  	<!-- END HEADER-->
+
+  	<!-- BEGIN BASE-->
+  	<div id="base">
+	    <!-- BEGIN CONTENT-->
+	    <div id="content" style="height:100vh; overflow-y:auto;">
+	      	<!-- BEGIN SECTION -->
+     		<section class="has-actions" style="height:auto;">
+				<div class="section-header">
+					<ol class="breadcrumb">
+						<li class="active">Charts</li>
+					</ol>
+				</div>
+				<div class="section-body contain-lg">
+
+					<!-- PROGRAMADO VS EJECUTADO -->
+					<div class="row">
+						<div class="col-lg-12">
+							<h2 class="text-primary">Programado vs. Ejecutado</h2>
+						</div><!--end .col -->
+						<div class="col-lg-3 col-md-4">
+							<article class="margin-bottom-xxl">
+								<p>
+									Este gr&aacute;fico muestra el comparativo del avance entre las actividades programadas vs. las actividades ejecutadas.
+								</p>
+                                <div class="well">
+                                    <div class="clearfix">
+                                        <div class="pull-left" style="color: #9C27B0;"> Linea : &nbsp;&nbsp;</div>
+                                        <div class="pull-right"> Actividades Ejecutadas </div>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                    <div class="clearfix">
+                                        <div class="pull-left" style="color: #0aa89e;"> Linea : </div>
+                                        <div class="pull-right"> Actividades Planeadas </div>
+                                    </div>
+                                </div>
+                                <div class="form-group text-center">
+									<label for="anio" class="control-label">Seleccionar un a&ntilde;o:</label>
+									<select id="anio" class="form-control select2-list" data-placeholder="Seleccione un A&ntilde;o">
+										<optgroup label="A&ntilde;os">
+										</optgroup>
+									</select>
+								</div>
+								<form class="form">
+									<div class="form-group">
+										<div class="input-daterange input-group" id="mesesActividades">
+											<div class="input-group-content">
+												<input type="text" class="form-control" name="start" id="mesesActividades1" />
+												<label>Rango de Meses: </label>
+											</div>
+											<span class="input-group-addon">hasta</span>
+											<div class="input-group-content">
+												<input type="text" class="form-control" name="end" id="mesesActividades2" />
+												<div class="form-control-line"></div>
+											</div>
+										</div>
+									</div>
+								</form>
+                                <div class="text-center">
+									<p><button type="button" class="btn ink-reaction btn-raised btn-primary" onclick="filterPlanVSExec()">Mostrar</button></p>
+								</div>
+							</article>
+						</div>
+						<div class="col-lg-offset-1 col-md-8">
+							<div class="card">
+								<div class="card-body">
+									<div id="actividades" class="flot height-10" data-title="Actividades" data-color="#9C27B0,#0aa89e"></div>
+								</div>
+							</div>
+							<em id="textDates" class="text-caption">Actividades Ejecutadas vs. Actividades Planeadas en los meses de</em>
+						</div>
+					</div>
+					<!-- FIN PROGRAMADO VS EJECUTADO -->
+
+					<hr class="ruler-xxl"/>
+
+					<!-- TABLA COMPONENTES -->
+					<div class="row">
+						<div class="col-lg-12">
+							<h2 class="text-primary">Evaluaci&oacute;n Sistema de Control Interno</h2>
+						</div>
+						<div class="col-lg-3 col-md-4">
+							<article class="margin-bottom-xxl">
+								<p>
+									Este gr&aacute;fico muestra el nivel de cumplimiento de los elementos con sus respectivos componentes.
+								</p>
+                                <div class="form-group text-center">
+									<label for="anioTablaComponentes" class="control-label">Seleccionar un a&ntilde;o:</label>
+									<select id="anioTablaComponentes" class="form-control select2-list" data-placeholder="Seleccione un A&ntilde;o">
+										<optgroup label="A&ntilde;os">
+										</optgroup>
+									</select>
+								</div>
+								<form class="form">
+									<div class="form-group">
+										<div class="input-daterange input-group" id="mesesComponentTable">
+											<div class="input-group-content">
+												<input type="text" class="form-control" name="start" id="mesesActividades1" />
+												<label>Rango de Meses: </label>
+											</div>
+											<span class="input-group-addon">hasta</span>
+											<div class="input-group-content">
+												<input type="text" class="form-control" name="end" id="mesesActividades2" />
+												<div class="form-control-line"></div>
+											</div>
+										</div>
+									</div>
+								</form>
+								<div class="form-group text-center">
+									<label for="departamentoTablaComponentes" class="control-label">Filtrar por departamentos:</label>
+									<select id="departamentoTablaComponentes" class="form-control select2-list" data-placeholder="Seleccione un Departamento">
+										<optgroup label="Departamentos">
+											<option value="all">Institucional</option>
+										</optgroup>
+									</select>
+								</div>
+								<div style="width:100%">
+									<div class="card" style="width:100%">
+										<div class="card-body no-padding">
+											<ul id="componentListComponentTable" class="list">
+											</ul>
+										</div>
+									</div>
+									<em class="text-caption">Seleccione los componentes a mostrar.</em>
+								</div>
+								<div class="text-center">
+									<p><button type="button" class="btn ink-reaction btn-raised btn-primary" onclick="filterComponentTable()">Mostrar</button></p>
+								</div>
+							</article>
+						</div>
+						<div class="col-lg-offset-1 col-md-8">
+							<div class="card">
+								<div class="card-body">
+									<table id="componentTable">
+									  	<thead>
+									  		<tr class="tr">
+										    	<th class="text-center th">Elementos</th>
+										    	<th class="text-center th">Avance (%)</th>
+										    	<th class="text-center th">Componentes</th>
+										    	<th class="text-center th">Avance (%)</th>
+									  		</tr>
+									  	</thead>
+									  	<tbody id="componentTableBody">
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<em id="textCompoTable" class="text-caption">Completación de Elementos vs Componentes: Ambiente de Control, Evaluación de Riesgos, Monitoreo , Comunicación , Actividades de Control</em>
+						</div>
+					</div>
+					<!-- FIN TABLA COMPONENTES -->
+
+					<hr class="ruler-xxl"/>
+
+					<!-- TABLA PORCENTAJE CUMPLIMIENTO COMPONENTES - ELEMENTOS - POR COMPONENTE -->
+					<div class="row">
+						<div class="col-lg-12">
+							<h2 class="text-primary">Estatus del n&uacute;mero de Actividades por Componente</h2>
+						</div>
+						<div class="col-lg-3 col-md-4">
+							<article class="margin-bottom-xxl">
+								<p>
+									Este gr&aacute;fico muestra el n&uacute;mero de cumplimiento de las actividades por componente.
+								</p>
+                                <div class="form-group text-center">
+									<label for="anioComponentesGraph" class="control-label">Seleccionar un a&ntilde;o:</label>
+									<select id="anioComponentesGraph" class="form-control select2-list" data-placeholder="Seleccione un A&ntilde;o">
+										<optgroup label="A&ntilde;os">
+										</optgroup>
+									</select>
+								</div>
+								<form class="form">
+									<div class="form-group">
+										<div class="input-daterange input-group" id="mesesComponentesGraph">
+											<div class="input-group-content">
+												<input type="text" class="form-control" name="start" id="mesesComponentesGraph1" />
+												<label>Rango de Meses: </label>
+											</div>
+											<span class="input-group-addon">hasta</span>
+											<div class="input-group-content">
+												<input type="text" class="form-control" name="end" id="mesesComponentesGraph2" />
+												<div class="form-control-line"></div>
+											</div>
+										</div>
+									</div>
+								</form>
+								<div class="form-group text-center">
+									<label for="departamentoComponentesGraph" class="control-label">Filtrar por departamentos:</label>
+									<select id="departamentoComponentesGraph" class="form-control select2-list" data-placeholder="Seleccione un Departamento">
+										<optgroup label="Departamentos">
+											<option value="all">Institucional</option>
+										</optgroup>
+									</select>
+								</div>
+								<div style="width:100%">
+									<div class="card" style="width:100%">
+										<div class="card-body no-padding">
+											<ul id="componentListComponentesGraph" class="list">
+											</ul>
+										</div>
+									</div>
+									<em class="text-caption">Seleccione los componentes a mostrar.</em>
+								</div>
+								<div class="text-center">
+									<p><button type="button" class="btn ink-reaction btn-raised btn-primary" onclick="filterComponentGraph()">Mostrar</button></p>
+								</div>
+							</article>
+						</div>
+						<div class="col-lg-offset-1 col-md-8">
+							<div class="card">
+								<div class="card-body">
+									<div id="componentes" style="height-10" data-colors="#4caf50,#ff9800,#f44336"></div>
+								</div>
+							</div>
+							<em id="textCompoTable" class="text-caption">Componentes</em>
+						</div>
+					</div>
+					<!-- FIN PORCENTAJE CUMPLIMIENTO COMPONENTES - ELEMENTOS - POR COMPONENTE -->
+
+					<hr class="ruler-xxl"/>
+
+					<!-- PORCENTAJE CUMPLIMIENTO COMPONENTES - ELEMENTOS - POR DEPARTAMENTO -->
+					<div class="row">
+						<div class="col-lg-12">
+							<h2 class="text-primary">Estatus del n&uacute;mero de Actividades por Departamento</h2>
+						</div><!--end .col -->
+						<div class="col-lg-3 col-md-4">
+							<article class="margin-bottom-xxl">
+								<p>
+									Este gr&aacute;fico muestra el n&uacute;mero de cumplimiento de las actividades a lo largo de diferentes departamentos.
+								</p>
+                                <div class="form-group text-center">
+									<label for="anioDepartamentosGraph" class="control-label">Seleccionar un a&ntilde;o:</label>
+									<select id="anioDepartamentosGraph" class="form-control select2-list" data-placeholder="Seleccione un A&ntilde;o">
+										<optgroup label="A&ntilde;os">
+										</optgroup>
+									</select>
+								</div>
+								<form class="form">
+									<div class="form-group">
+										<div class="input-daterange input-group" id="mesesDepartamentosGraph">
+											<div class="input-group-content">
+												<input type="text" class="form-control" name="start" id="mesesDepartamentosGraph1" />
+												<label>Rango de Meses: </label>
+											</div>
+											<span class="input-group-addon">hasta</span>
+											<div class="input-group-content">
+												<input type="text" class="form-control" name="end" id="mesesDepartamentosGraph2" />
+												<div class="form-control-line"></div>
+											</div>
+										</div>
+									</div>
+								</form>
+								<form class="form" style="background-color: #fff; border-radius: 5px;">
+									<select id="optgroup" multiple="multiple">
+									</select>
+								</form>
+								<em class="text-caption">Derecha: Departamentos a mostrar.</em>
+								<div class="text-center">
+									<p><button type="button" class="btn ink-reaction btn-raised btn-primary" onclick="filterDepartmentGraph()">Mostrar</button></p>
+								</div>
+							</article>
+						</div>
+						<div class="col-lg-offset-1 col-md-8" style="height: 100%;">
+							<div class="card" style="height: 100%;">
+								<div class="card-body" style="height: 100%;">
+									<div id="departamentos" style="height: 100%;" data-colors="#4caf50,#ff9800,#f44336"></div>
+								</div>
+							</div>
+							<em class="text-caption">Departamentos</em>
+						</div>
+					</div>
+					<!-- FIN PORCENTAJE CUMPLIMIENTO COMPONENTES - ELEMENTOS - POR DEPARTAMENTO -->
+
+					<hr class="ruler-xxl"/>
+
+					<!-- COMPARATIVA ANUAL -->
+					<div class="row">
+						<div class="col-lg-12">
+							<h2 class="text-primary">Comparativa Anual</h2>
+						</div><!--end .col -->
+						<div class="col-lg-3 col-md-4">
+							<article class="margin-bottom-xxl">
+								<p>
+									Este gr&aacute;fico compara los resultados en porcentaje de completaci&oacute;n de los componentes por a&ntilde;o.
+								</p>
+                                <div class="form-group text-center">
+									<label for="anioDepartamentosComparativa1" class="control-label">A&ntilde;o 1:</label>
+									<select id="anioDepartamentosComparativa1" class="form-control select2-list" data-placeholder="Seleccione un A&ntilde;o">
+										<optgroup label="A&ntilde;os">
+										</optgroup>
+									</select>
+								</div>
+								<div class="form-group text-center">
+									<label for="anioDepartamentosComparativa2" class="control-label">A&ntilde;o 2:</label>
+									<select id="anioDepartamentosComparativa2" class="form-control select2-list" data-placeholder="Seleccione un A&ntilde;o">
+										<optgroup label="A&ntilde;os">
+										</optgroup>
+									</select>
+								</div>
+								<div class="form-group text-center">
+									<label for="departamentoDepartamentosComparativa" class="control-label">Filtrar por departamentos:</label>
+									<select id="departamentoDepartamentosComparativa" class="form-control select2-list" data-placeholder="Seleccione un Departamento">
+										<optgroup label="Departamentos">
+											<option value="all">Institucional</option>
+										</optgroup>
+									</select>
+								</div>
+								<div style="width:100%">
+									<div class="card" style="width:100%">
+										<div class="card-body no-padding">
+											<ul id="componentListDepartamentosComparativa" class="list">
+											</ul>
+										</div>
+									</div>
+									<em class="text-caption">Seleccione los componentes a mostrar.</em>
+								</div>
+								<div class="text-center">
+									<p><button type="button" class="btn ink-reaction btn-raised btn-primary" onclick="filterDepartmentAnual()">Mostrar</button></p>
+								</div>
+							</article>
+						</div>
+						<div class="col-lg-offset-1 col-md-8" style="height: 100%;">
+							<div class="card" style="height: 100%;">
+								<div class="card-body" style="height: 100%;">
+									<div id="departamentosComparativa1" style="height: 100%;" data-colors="#9C27B0,#2196F3,#0aa89e,#FF9800,#90a4ae"></div>
+								</div>
+							</div>
+							<em id="textComparativa1" class="text-caption">Componentes a&ntilde;o 1</em>
+							<div class="card" style="height: 100%;">
+								<div class="card-body" style="height: 100%;">
+									<div id="departamentosComparativa2" style="height: 100%;" data-colors="#9C27B0,#2196F3,#0aa89e,#FF9800,#90a4ae"></div>
+								</div>
+							</div>
+							<em id="textComparativa2" class="text-caption">Componentes a&ntilde;o 2</em>
+						</div>
+					</div>
+					<!-- FIN COMPARATIVA ANUAL -->
+
+					<hr class="ruler-xxl"/>
+	
+					<!-- ANALISIS COMPONENTES INDIVIDUALES -->
+					<div class="row">
+						<div class="col-lg-12">
+							<h2 class="text-primary">An&aacute;lisis de Componentes</h2>
+						</div>
+						<div class="col-lg-12">
+							<h4>Componentes</h4>
+						</div>
+						<div class="col-lg-3 col-md-4">
+							<article class="margin-bottom-xxl">
+								<p>
+									Filtros para customizar los elementos de los componentes en la gr&aacute;fica.
+								</p>
+								<!-- <div class="form-group text-center">
+									<label for="componenteComponentes" class="control-label">Filtrar por componente:</label>
+									<select id="componenteComponentes" class="form-control select2-list" data-placeholder="Seleccione un Departamento">
+										<optgroup label="Componentes">
+											<option value="all">Todos</option>
+										</optgroup>
+									</select>
+								</div> -->
+								<div class="form-group text-center">
+									<label for="departamentoComponentes" class="control-label">Filtrar por departamentos:</label>
+									<select id="departamentoComponentes" class="form-control select2-list" data-placeholder="Seleccione un Departamento">
+										<optgroup label="Departamentos">
+											<option value="all">Institucional</option>
+										</optgroup>
+									</select>
+								</div>
+								<div class="form-group text-center">
+									<label for="anioComponentes" class="control-label">Seleccionar un a&ntilde;o:</label>
+									<select id="anioComponentes" class="form-control select2-list" data-placeholder="Seleccione un A&ntilde;o">
+										<optgroup label="A&ntilde;os">
+										</optgroup>
+									</select>
+								</div>
+								<div style="width:100%">
+									<div class="card" style="width:100%">
+										<div class="card-body no-padding">
+											<ul id="componentListDonutGraph" class="list">
+											</ul>
+										</div>
+									</div>
+									<em class="text-caption">Seleccione los componentes a mostrar.</em>
+								</div>
+								<div class="text-center">
+									<p><button type="button" class="btn ink-reaction btn-raised btn-primary" onclick="getComponentsFilter()">Mostrar</button></p>
+								</div>
+							</article>
+						</div>
+						<div class="col-lg-offset-1 col-md-8">
+							<div class="card">
+								<div class="card-body">
+									<div id="componentesPlaneado" class="height-12" data-colors="#9C27B0,#2196F3,#0aa89e,#FF9800,#90a4ae,#ff5722,#ffff00,#ec407a,#64dd17,#283593,#6200ea,#0288d1,#009688,#aeea00,#c8e6c9,#a1887f,#616161,#3e2723,#dd2c00"></div>
+								</div>
+							</div>
+							<em id="captionComponentes" class="text-caption">Componentes Planeado</em>
+							<div class="card">
+								<div class="card-body">
+									<div id="componentesEjecutado" class="height-12" data-colors="#9C27B0,#2196F3,#0aa89e,#FF9800,#90a4ae,#ff5722,#ffff00,#ec407a,#64dd17,#283593,#6200ea,#0288d1,#009688,#aeea00,#c8e6c9,#a1887f,#616161,#3e2723,#dd2c00"></div>
+								</div>
+							</div>
+							<em class="text-caption">Componentes Ejecutado</em>
+						</div>
+					</div>
+					<!-- FIN ANALISIS COMPONENTES INDIVIDUALES -->
+
+				</div><!--end .section-body -->
+			</section>
+	    </div><!--end #content-->   
+	    <!-- END CONTENT -->
+
+
+	    <!-- BEGIN MENUBAR-->
+	    <div id="menubar" class="menubar-inverse">
+	      	<div class="menubar-fixed-panel">
+	        	<div>
+	          		<a class="btn btn-icon-toggle btn-default menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+	            		<i class="fa fa-bars"></i>
+	          		</a>
+	        	</div>
+	        	<div class="brand-holder">
+	          		<a id="menulbl">
+	            		<span class="text-lg text-bold text-primary ">MENU</span>
+	          		</a>
+	        	</div>
+	      	</div>
+
+	      	<div class="menubar-scroll-panel">
+	        	<!-- BEGIN MAIN MENU -->
+	        	<ul id="main-menu" class="gui-controls gui-controls-tree">
+	          		<!-- Menu Presentacion -->
+	          		<li class="gui-folder">
+	            		<a href="">
+	              			<div class="gui-icon"><i class="fa fa-newspaper-o fa-fw"></i></div>
+	              			<span class="title largeText">Presentaci&oacute;n</span>
+	            		</a>
+	          		</li>
+
+	          		<!-- Menu Marco de Aplicaci&oacute;n -->
+	          		<li class="gui-folder">
+	            		<a href="">
+	              			<div class="gui-icon"><i class="fa fa-flask fa-fw"></i></div>
+	              			<span class="title largeText">Marco de Aplicaci&oacute;n</span>
+	            		</a>
+	          		</li>
+
+	          		<!-- Menu Components -->
+	          		<li class="gui-folder">
+	            		<a href="">
+	              			<div class="gui-icon"><i class="fa fa-file-text fa-fw"></i></div>
+	              			<span class="title largeText">Resultado del TAECII</span>
+	            		</a>
+	          		</li>
+
+	          		<!-- Menu Plan De Accion -->
+	          		<li class="gui-folder">
+	            		<a href="planDeAccion.html">
+	              			<div class="gui-icon"><i class="fa fa-file-text fa-fw"></i></div>
+	              			<span class="title largeText">Linea de Tiempo de Plan</span>
+	              			<span class="title largeText">de Acci&oacute;n</span>
+	            		</a>
+	          		</li>
+
+	          		<!-- Menu Componentes del Control -->
+	          		<li class="gui-folder">
+	            		<a>
+	              			<div class="gui-icon"><i class="fa fa-tasks"></i></div>
+	              			<span class="title largeText">Componentes del Control</span>
+	              			<span class="title largeText">Interno</span>
+	            		</a>
+	            		<ul>
+	              			<li><a href="ambienteDeControl.html"><span class="title largeText">Ambiente de Control</span></a></li>
+	              			<li>
+	                			<a href="#">
+	                  				<span class="title largeText">Evaluaci&oacute;n y Gesti&oacute;n</span>
+	                  				<span class="title largeText">de Riesgo</span>
+	                			</a>
+	              			</li>
+	              			<li><a href="#"><span class="title largeText">Actividades de Control</span></a></li>
+	              			<li><a href="#"><span class="title largeText">Sistemas de Informaci&oacute;n</span></a></li>
+	              			<li><a href="#"><span class="title largeText">Monitoreo</span></a></li>
+	            		</ul>
+	          		</li>
+
+	          		<!-- Menu Resultados -->
+	          		<li class="gui-folder">
+	            		<a>
+	              			<div class="gui-icon"><i class="fa fa-bar-chart fa-fw"></i></div>
+	              			<span class="title largeText">Resultados</span>
+	            		</a>
+	            		<ul>
+	              			<li><a href="puntaje.html"><span class="title largeText">Puntaje</span></a></li>
+	              			<li><a href="graficos.html"><span class="title largeText">Representaci&oacute;n Gr&aacute;fica</span></a></li>
+	              			<li><a href="#"><span class="title largeText">An&aacute;lisis</span></a></li>
+	            		</ul>
+	          		</li>
+
+	          		<!-- Menu Admninistracion -->
+	          		<li class="gui-folder">
+	            		<a href="administracion.html">
+	              			<div class="gui-icon"><i class="fa fa-database fa-fw"></i></div>
+	              			<span class="title largeText">Modulo de Admninistraci&oacute;n</span>
+	            		</a>
+	          		</li>
+	        	</ul>
+	        	<!--end .main-menu -->
+	        	<div class="menubar-foot-panel">
+	        		<p class="text-normal text-lg">CNBS <span class="title">&trade;</span></p>
+	        	</div>
+	        	<!-- END MAIN MENU -->
+	      	</div>
+	    </div><!--end #menubar-->
+	    <!-- END MENUBAR -->
+  	</div><!--end #base-->  
+  	<!-- END BASE -->
+
+  	<!-- BEGIN JAVASCRIPT -->
+
+	<!-- Insert this line above script imports  -->
+  	<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+      
+  	<script src="../assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
+  	<script src="../assets/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
+  	<script src="../assets/js/libs/jquery-ui/jquery-ui.min.js"></script>
+  	<script src="../assets/js/libs/bootstrap/bootstrap.min.js"></script>
+  	<script src="../assets/js/libs/spin.js/spin.min.js"></script>
+  	<script src="../assets/js/libs/autosize/jquery.autosize.min.js"></script>
+  	<script src="../assets/js/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+	<script src="../assets/js/libs/multi-select/jquery.multi-select.js"></script>
+  	<script src="../assets/js/libs/moment/moment.min.js"></script>
+  	<script src="../assets/js/libs/moment/langs.min.js"></script>
+  	<script src="../assets/js/libs/select2-4.0.3 2/dist/js/select2.min.js"></script>
+  	<script src="../assets/js/libs/bootstrap-rating/bootstrap-rating-input.min.js"></script>
+  	<script src="../assets/js/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+  	<script src="../assets/js/libs/bootstrap-datepicker/locales/bootstrap-datepicker.es.js"></script>
+  	<script src="../assets/js/libs/flot/jquery.flot.min.js"></script>
+	<script src="../assets/js/libs/flot/jquery.flot.time.min.js"></script>
+	<script src="../assets/js/libs/flot/jquery.flot.resize.min.js"></script>
+	<script src="../assets/js/libs/flot/jquery.flot.orderBars.js"></script>
+	<script src="../assets/js/libs/flot/jquery.flot.pie.js"></script>
+	<script src="../assets/js/libs/flot/curvedLines.js"></script>
+  	<script src="../assets/js/libs/nanoscroller/jquery.nanoscroller.min.js"></script>
+  	<script src="../assets/js/libs/jquery-validation/dist/jquery.validate.min.js"></script>
+  	<script src="../assets/js/libs/jquery-validation/dist/additional-methods.min.js"></script>
+  	<script src="../assets/js/libs/raphael/raphael-min.js"></script>
+	<script src="../assets/js/libs/morris.js/morris.min.js"></script>
+	<script src="../assets/js/libs/toastr/toastr.js"></script>
+  	<script src="../assets/js/core/source/App.js"></script>
+  	<script src="../assets/js/core/source/AppNavigation.js"></script>
+  	<script src="../assets/js/core/source/AppOffcanvas.js"></script>
+  	<script src="../assets/js/core/source/AppCard.js"></script>
+  	<script src="../assets/js/core/source/AppForm.js"></script>
+  	<script src="../assets/js/core/source/AppNavSearch.js"></script>
+  	<script src="../assets/js/core/source/AppVendor.js"></script>
+  	<script src="../assets/js/libs/DataTables/jquery.dataTables.min.js"></script>
+    
+  	<script src="graficos.js"></script>
+  	<!-- END JAVASCRIPT -->
+
+  	<!-- Insert this line after script imports -->
+  	<script>if (window.module) module = window.module;</script>
+    
+  	</body>
+</html>

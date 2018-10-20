@@ -1,0 +1,22 @@
+{
+  "name": "taecii",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "2.0.5"
+  },
+  "dependencies": {
+    "mssql": "4.2.1",
+    "node-mssql": "0.0.1",
+    "select2": "4.0.3",
+    "sql": "0.78.0",
+    "sql-generate": "1.5.0"
+  }
+}

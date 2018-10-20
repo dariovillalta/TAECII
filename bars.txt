@@ -1,0 +1,8 @@
+BARRAS:
+
+Stacked bar charts: colores verde porcentaje de cumplidas, color naranja color advertencia ect a nivel de departamentos
+
+Bar charts: comparativa anual / historica
+
+Bar charts: total actividades cumplida(verde), total actividades adertenvia(naranja) ect a nivel de componentes y elementos
+
